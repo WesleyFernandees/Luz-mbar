@@ -326,14 +326,32 @@
     @media (max-width: 860px){
       .videoGrid{ grid-template-columns: 1fr; }
     }
-    .videoFrame{
-      position: relative;
-      border-radius: var(--radius);
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.10);
-      isolation: isolate;
-    }
+   .videoFrame{
+  position: relative;
+  border-radius: var(--radius);
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.10);
+  isolation: isolate;
+
+  /* NOVO: limita altura e deixa “luxo” */
+  max-height: 360px;
+}
+
+.videoFrame video{
+  width: 100%;
+  height: 360px;         /* NOVO: controla o tamanho */
+  display: block;
+  object-fit: contain;   /* NOVO: NÃO corta, mostra tudo */
+  transform: none;       /* NOVO: remove zoom */
+  background: rgba(0,0,0,.20); /* NOVO: barras discretas se sobrar espaço */
+}
+
+/* Mobile mais baixo */
+@media (max-width: 860px){
+  .videoFrame{ max-height: 240px; }
+  .videoFrame video{ height: 240px; }
+}
     .videoFrame::after{
       content:"";
       position:absolute; inset:0;
@@ -1486,4 +1504,5 @@
     updateCartUI(false);
   </script>
 </body>
+
 </html>
